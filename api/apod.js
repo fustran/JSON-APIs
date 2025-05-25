@@ -12,34 +12,6 @@ export default async function handler(req, res) {
         const data = await nasaRes.json();
         const item = Array.isArray(data) ? data[0] : data;
 
-        async function translate(text) {
-            try {
-                const trRes = await fetch(
-                    'https://translate.argosopentech.com/translate',
-                    {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            q: text,
-                            source: 'en',
-                            target: 'es',
-                            format: 'text'
-                        })
-                    }
-                );
-                if (!trRes.ok) throw new Error(`Status ${trRes.status}`);
-                const { translatedText } = await trRes.json();
-                return translatedText;
-            } catch {
-                return text;
-            }
-        }
-
-        const [titleEs, explanationEs] = await Promise.all([
-            translate(item.title),
-            translate(item.explanation)
-        ]);
-
         res.setHeader(
             'Cache-Control',
             's-maxage=86400, stale-while-revalidate'
