@@ -4,8 +4,8 @@ body {
     background-image:
 
             linear-gradient(
-                    rgba(255,255,255, 0.5),  /* cambia este 0.5 para más o menos intensidad */
-                    rgba(255,255,255, 0.5)
+                    rgba(255,255,255, 0.2),  /* cambia este 0.5 para más o menos intensidad */
+                    rgba(255,255,255, 0.2)
             ),
 
             url('./assets/fondo.jpg');
