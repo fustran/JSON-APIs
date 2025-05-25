@@ -1,0 +1,11 @@
+{
+  "marca": "orbea",
+  "modelo": "kao",
+  "precio": 1000.0,
+  "corredores": [
+    "David",
+    "Iván",
+    "Pepito",
+    "Menganito"
+  ]
+}
