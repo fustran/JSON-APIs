@@ -10,7 +10,7 @@ export default async function handler(req, res) {
                 .json({ error: `NASA API error ${nasaRes.status}` });
         }
         const data = await nasaRes.json();
-        const item = Array.isArray(data) ? data[0] : data;
+        const items = Array.isArray(data) ? data : [data];
 
         async function translate(text) {
             try {
@@ -35,23 +35,27 @@ export default async function handler(req, res) {
             }
         }
 
-        const [titleEs, explanationEs] = await Promise.all([
-            translate(item.title),
-            translate(item.explanation)
-        ]);
+        const translatedItems = await Promise.all(
+            items.map(async item => {
+                const [titleEs, explanationEs] = await Promise.all([
+                    translate(item.title),
+                    translate(item.explanation)
+                ]);
+                return {
+                    ...item,
+                    title:       titleEs,
+                    explanation: explanationEs
+                };
+            })
+        );
 
         res.setHeader(
             'Cache-Control',
             's-maxage=86400, stale-while-revalidate'
         );
 
-        return res.json({
-            date:        item.date,
-            title:       titleEs,
-            url:         item.url,
-            explanation: explanationEs,
-            media_type:  item.media_type
-        });
+        return res.json(translatedItems);
+
     } catch (err) {
         console.error('api/apod error:', err);
         return res.status(500).json({ error: 'Internal server error' });

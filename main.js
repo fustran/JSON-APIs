@@ -2,10 +2,10 @@ const API_URL = '/api/apod';
 
 async function fetchAndRender() {
     try {
-        const res = await fetch(API_URL);
+        const res   = await fetch(API_URL);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const item = await res.json();
-        renderGallery([item]);
+        const items = await res.json();
+        renderGallery(items);
     } catch (err) {
         console.error(err);
         document.getElementById('gallery').innerHTML =
