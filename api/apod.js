@@ -2,7 +2,7 @@
 export default async function handler(req, res) {
     try {
         const nasaRes = await fetch(
-            `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&count=1`
+            `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&count=12`
         );
         if (!nasaRes.ok) {
             return res
