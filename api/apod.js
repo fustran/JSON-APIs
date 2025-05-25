@@ -1,52 +1,65 @@
+
+import fetch from 'node-fetch';
+
 export default async function handler(req, res) {
     try {
+
         const nasaRes = await fetch(
             `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&count=1`
         );
         if (!nasaRes.ok) {
-            return res
-                .status(nasaRes.status)
+            return res.status(nasaRes.status)
                 .json({ error: `NASA API error ${nasaRes.status}` });
         }
 
-        const dataArray = await nasaRes.json().then(data =>
-            Array.isArray(data) ? data : [data]
+        const dataArray = await nasaRes.json().then(d =>
+            Array.isArray(d) ? d : [d]
         );
         const item = dataArray[0];
 
-        let explanationEs = item.explanation;
-        try {
-            const trRes = await fetch(
-                'https://translate.argosopentech.com/translate',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        q: item.explanation,
-                        source: 'en',
-                        target: 'es',
-                        format: 'text'
-                    })
-                }
-            );
-            if (trRes.ok) {
-                const trJson = await trRes.json();
-                explanationEs = trJson.translatedText;
+        async function translate(text) {
+            try {
+                const trRes = await fetch(
+                    'https://translate.argosopentech.com/translate',
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            q: text,
+                            source: 'en',
+                            target: 'es',
+                            format: 'text'
+                        })
+                    }
+                );
+                if (!trRes.ok) throw new Error(`Status ${trRes.status}`);
+                const { translatedText } = await trRes.json();
+                return translatedText;
+            } catch {
+                return text;
             }
-        } catch (_) {
-
         }
 
-        res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
+        const [titleEs, explanationEs] = await Promise.all([
+            translate(item.title),
+            translate(item.explanation)
+        ]);
+
+        res.setHeader(
+            'Cache-Control',
+            's-maxage=86400, stale-while-revalidate'
+        );
+
         return res.json({
-            date: item.date,
-            title: item.title,
-            url: item.url,
+            date:        item.date,
+            title:       titleEs,
+            url:         item.url,
             explanation: explanationEs,
-            media_type: item.media_type
+            media_type:  item.media_type
         });
+
     } catch (err) {
-        console.error('API function error:', err);
+        console.error('api/apod error:', err);
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
