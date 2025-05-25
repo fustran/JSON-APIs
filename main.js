@@ -24,6 +24,7 @@ function renderGallery(items) {
         // Si es vídeo, usamos iframe; si no, img
         const mediaHTML = item.media_type === 'video'
             ? `<iframe 
+            loading="lazy"
             src="${item.url}" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -31,6 +32,7 @@ function renderGallery(items) {
             style="width:100%; height:180px; border:none; border-radius:8px 8px 0 0;"
          ></iframe>`
             : `<img 
+            loading="lazy"
             src="${item.url}" 
             alt="${item.title}" 
             style="height:180px; object-fit:cover; width:100%; display:block;"
