@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Getter
 @ToString
+@NoArgsConstructor
 public class Bicis {
 
     private String marca;
@@ -20,10 +22,6 @@ public class Bicis {
         this.modelo = modelo;
         this.precio = precio;
         this.corredores = new ArrayList<>(corredores);
-    }
-
-    public Bicis(){
-
     }
 
 }

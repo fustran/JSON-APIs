@@ -1,0 +1,72 @@
+body {
+    font-family: sans-serif;
+    margin: 2rem;
+    background: #f4f4f4;
+    color: #333;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+/* Fijamos altura y object-fit para recortar */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+.card-content {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.card-content h2 {
+    margin: 0 0 .5rem;
+    font-size: 1.1rem;
+}
+.card-content small {
+    display: block;
+    margin-bottom: .5rem;
+    color: #666;
+    font-size: .9rem;
+}
+/* párrafo recortado inicialmente */
+.card-content p {
+    font-size: .9rem;
+    line-height: 1.4;
+    max-height: 4.2rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin: 0;
+}
+.card-content p.open {
+    max-height: none;
+}
+.read-more {
+    margin-top: .5rem;
+    align-self: start;
+    background: none;
+    border: none;
+    color: #0066cc;
+    font-size: .9rem;
+    cursor: pointer;
+    padding: 0;
+}
+.read-more:hover {
+    text-decoration: underline;
+}
