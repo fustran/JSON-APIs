@@ -1,7 +1,5 @@
-
 export default async function handler(req, res) {
     try {
-        // 1) Llamada a la API de la NASA
         const nasaRes = await fetch(
             `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&count=1`
         );
@@ -16,7 +14,6 @@ export default async function handler(req, res) {
         );
         const item = dataArray[0];
 
-        // 2) Traducción a español
         let explanationEs = item.explanation;
         try {
             const trRes = await fetch(
@@ -40,7 +37,6 @@ export default async function handler(req, res) {
 
         }
 
-        // 3) Enviamos la respuesta y cachea en CDN
         res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
         return res.json({
             date: item.date,

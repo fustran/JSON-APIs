@@ -1,12 +1,9 @@
-
 const API_URL = '/api/apod';
 
 async function fetchAndRender() {
     try {
         const res = await fetch(API_URL);
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const item = await res.json();
         renderGallery([item]);
     } catch (err) {
@@ -20,19 +17,28 @@ function renderGallery(items) {
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
     items.forEach(item => {
-        const c = document.createElement('div');
-        c.className = 'card';
-        c.innerHTML = `
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
       <img src="${item.url}" alt="${item.title}">
       <div class="card-content">
         <h2>${item.title}</h2>
         <small>${item.date}</small>
-        <p>${item.explanation}</p>
+        <p class="truncate">${item.explanation}</p>
+        <button class="read-more">Leer más</button>
       </div>
     `;
-        gallery.appendChild(c);
+        gallery.appendChild(card);
+
+        const btn = card.querySelector('.read-more');
+        const p   = card.querySelector('p');
+        btn.addEventListener('click', () => {
+            p.classList.toggle('open');
+            btn.textContent = p.classList.contains('open')
+                ? 'Leer menos'
+                : 'Leer más';
+        });
     });
 }
 
-// Arranca la app
 fetchAndRender();
