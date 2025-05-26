@@ -102,7 +102,7 @@ h1 {
 
 .nasa-logo-text {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     color: #fff;
     background: #0b3d91;
     padding: 0.2em 0.5em;
@@ -111,14 +111,14 @@ h1 {
 }
 
 .logo-img {
-    width: 100px;
+    width: 120px;
     height: auto;
     display: block;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 7rem;
     margin-top: 4rem;
 }
@@ -126,8 +126,8 @@ h1 {
 .buttons {
     display: none;
     justify-content: center;
-    gap: 1rem;
-    margin: 2rem auto;
+    gap: 3rem;
+    margin: 3rem auto;
 }
 
 #load-more,
