@@ -4,7 +4,7 @@ body {
     background-image:
 
             linear-gradient(
-                    rgba(255,255,255, 0.2),  /* cambia este 0.5 para más o menos intensidad */
+                    rgba(255,255,255, 0.2),
                     rgba(255,255,255, 0.2)
             ),
 
@@ -118,9 +118,8 @@ h1 {
 
 .grid {
     display: grid;
-    /* Fijo 4 columnas (se adapta en pantallas más pequeñas) */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;               /* más espacio entre filas y columnas */
+    gap: 3rem;
     margin-top: 2rem;
 }
 
@@ -143,4 +142,10 @@ h1 {
     .grid {
         grid-template-columns: repeat(4, 1fr);
     }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
