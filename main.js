@@ -79,3 +79,20 @@ function updateButtons() {
 }
 
 fetchAndRender();
+
+// Botón “Volver arriba”
+const btnTop = document.getElementById('back-to-top');
+
+// Aparece al hacer scroll down
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        btnTop.classList.add('show');
+    } else {
+        btnTop.classList.remove('show');
+    }
+});
+
+// Al clicar, scroll suave al top
+btnTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
