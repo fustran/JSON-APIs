@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 body {
-    background-image: url('./assets/fondo.jpg');
+    background-image:
+            linear-gradient(rgba(255,255,255,0.1),
+            rgba(255,255,255,0.1)),
+
+            url('./assets/fondo.jpg');
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +53,7 @@ body {
 }
 @media (max-width: 1199px) {
     .grid {
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
 }
 .card {
