@@ -62,6 +62,15 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+    transform: scale(1.03);
+    box-shadow:
+            0 -5px 8px rgba(255, 200, 0, 0.7),
+            5px 0 8px rgba(255, 120, 0, 0.5),
+            -5px 0 8px rgba(255, 120, 0, 0.5),
+            0 4px 12px rgba(0,0,0,0.3);
 }
 .card img,
 .card iframe {
@@ -102,7 +111,6 @@ body {
     background: rgba(0,0,0,0.2);
     border-radius: 3px;
 }
-
 .buttons {
     display: none;
     justify-content: center;
@@ -129,8 +137,6 @@ body {
     opacity: 0.5;
     cursor: default;
 }
-
-/* Botón volver arriba */
 #back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -152,12 +158,10 @@ body {
     transition: background 0.2s, box-shadow 0.2s, opacity 0.3s;
     z-index: 1000;
 }
-
 #back-to-top.show {
     display: flex;
     opacity: 0.9;
 }
-
 #back-to-top:hover {
     background: #ffa000;
     box-shadow:
@@ -165,17 +169,4 @@ body {
             0 0 30px rgba(255,200,0,0.6),
             0 4px 8px rgba(0,0,0,0.3);
     opacity: 1;
-}
-
-.card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-    transform: scale(1.03);
-    box-shadow:
-            0 -5px 8px rgba(255, 200, 0, 0.7),
-            5px 0 8px rgba(255, 120, 0, 0.5),
-            -5px 0 8px rgba(255, 120, 0, 0.5),
-            0 4px 12px rgba(0,0,0,0.3);
 }
