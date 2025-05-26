@@ -1,41 +1,55 @@
-const API_URL = '/api/apod';
+// main.js
+
+const API_URL     = '/api/apod';
+const BATCH_SIZE  = 4;
+
+let allItems = [];
+let shown    = 0;
 
 async function fetchAndRender() {
     try {
         const res   = await fetch(API_URL);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const items = await res.json();
-        renderGallery(items);
+        allItems = await res.json();
+
+        // renderiza las primeras 4
+        renderNextBatch();
+
+        // muestra el botón si quedan más
+        const btn = document.getElementById('load-more');
+        btn.addEventListener('click', () => {
+            renderNextBatch();
+        });
     } catch (err) {
         console.error(err);
         document.getElementById('gallery').innerHTML =
             `<p style="color:red;text-align:center;">Error: ${err.message}</p>`;
+        document.getElementById('load-more').style.display = 'none';
     }
 }
 
-function renderGallery(items) {
+function renderNextBatch() {
     const gallery = document.getElementById('gallery');
-    gallery.innerHTML = '';
-
-    items.forEach(item => {
+    const end     = Math.min(shown + BATCH_SIZE, allItems.length);
+    for (let i = shown; i < end; i++) {
+        const item = allItems[i];
         const card = document.createElement('div');
         card.className = 'card';
 
-        // Si es vídeo, usamos iframe; si no, img
         const mediaHTML = item.media_type === 'video'
-            ? `<iframe 
-            loading="lazy"
-            src="${item.url}" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-            style="width:100%; height:180px; border:none; border-radius:8px 8px 0 0;"
+            ? `<iframe
+           loading="lazy"
+           src="${item.url}"
+           frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+           allowfullscreen
+           style="width:100%; height:180px; border:none; border-radius:8px 8px 0 0;"
          ></iframe>`
-            : `<img 
-            loading="lazy"
-            src="${item.url}" 
-            alt="${item.title}" 
-            style="height:180px; object-fit:cover; width:100%; display:block;"
+            : `<img
+           loading="lazy"
+           src="${item.url}"
+           alt="${item.title}"
+           style="width:100%; height:180px; object-fit:cover; display:block;"
          >`;
 
         card.innerHTML = `
@@ -49,6 +63,7 @@ function renderGallery(items) {
     `;
         gallery.appendChild(card);
 
+        // Leer más toggle
         const btn = card.querySelector('.read-more');
         const p   = card.querySelector('p');
         btn.addEventListener('click', () => {
@@ -57,7 +72,14 @@ function renderGallery(items) {
                 ? 'Leer menos'
                 : 'Leer más';
         });
-    });
+    }
+    shown = end;
+
+    // Si ya no quedan más, ocultamos el botón
+    if (shown >= allItems.length) {
+        document.getElementById('load-more').style.display = 'none';
+    }
 }
 
+// Arranca la app
 fetchAndRender();
