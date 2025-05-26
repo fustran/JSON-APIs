@@ -137,7 +137,7 @@ body {
     right: 2rem;
     width: 3rem;
     height: 3rem;
-    background: #0b3d91;
+    background: #092f6b;
     color: white;
     border: none;
     border-radius: 50%;
@@ -156,4 +156,14 @@ body {
 }
 #back-to-top:hover {
     opacity: 1;
+}
+
+@media (max-width: 600px) {
+    #back-to-top {
+        width: 2.5rem;
+        height: 2.5rem;
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 1.2rem;
+    }
 }
