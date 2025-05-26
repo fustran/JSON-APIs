@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 body {
-    background-image:
-            linear-gradient(rgba(255,255,255,0.1),
-            rgba(255,255,255,0.1)),
-
-            url('./assets/fondo.jpg');
+    background-image: url('./assets/fondo.jpg');
 
     background-size: cover;
     background-position: center;
@@ -16,7 +12,7 @@ body {
     box-sizing: border-box;
 }
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 2rem;
 }
