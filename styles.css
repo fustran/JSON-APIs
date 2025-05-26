@@ -56,12 +56,11 @@ body {
     background: white;
     border-radius: 10px;
     box-shadow:
-        /* glow amarillo-anaranjado arriba */
-            0 -8px 16px rgba(255, 200, 0, 0.8),
-                /* sombra rojiza a la derecha */
-            8px 0 12px rgba(255, 80, 0, 0.5),
-                /* sombra rojiza a la izquierda */
-            -8px 0 12px rgba(255, 80, 0, 0.5);
+        /* leve glow cálido arriba */
+            0 -4px 6px rgba(255, 200, 0, 0.6),
+                /* sombras laterales muy suaves rojizas */
+            4px 0 6px rgba(255, 100, 0, 0.4),
+            -4px 0 6px rgba(255, 100, 0, 0.4);
     overflow: hidden;
     display: flex;
     flex-direction: column;
