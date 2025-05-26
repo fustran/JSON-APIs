@@ -2,13 +2,10 @@ package org.example;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,7 +21,7 @@ public class Main {
         System.out.println();
         System.out.println(json);
 
-        try (FileWriter file = new FileWriter("src/main/resources/Bicis.json")){
+        try (FileWriter file = new FileWriter("src/main/resources/BicisJson/Bicis.json")){
             gson.toJson(bicis, file);
         } catch (IOException e) {
             System.out.println("Algo ha salido mal.");
@@ -37,7 +34,7 @@ public class Main {
         System.out.println(bicis2.getMarca() + ", " + bicis2.getModelo() + ", " + bicis2.getPrecio() + ", " + bicis2.getCorredores());
 
         try {
-            FileReader objetoLeido = new FileReader("src/main/resources/Bicis.json");
+            FileReader objetoLeido = new FileReader("src/main/resources/BicisJson/Bicis.json");
             Bicis bici3 = gson.fromJson(objetoLeido, Bicis.class);
             System.out.println(bici3.getMarca() + ", " + bici3.getModelo() + ", " + bici3.getPrecio() + ", " + bici3.getCorredores());
         } catch (FileNotFoundException e) {

@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "World of Warcraft",
+    "plataforma": "PC",
+    "precio": 45.0,
+    "disponible": true,
+    "generos": [
+      "ACCION",
+      "AVENTURA",
+      "ROL"
+    ]
+  },
+  {
+    "nombre": "F1",
+    "plataforma": "PS5",
+    "precio": 25.0,
+    "disponible": false,
+    "generos": [
+      "CARRERAS",
+      "SIMULACION"
+    ]
+  },
+  {
+    "nombre": "Harry Potter",
+    "plataforma": "XBOX",
+    "precio": 70.0,
+    "disponible": true,
+    "generos": [
+      "AVENTURA",
+      "ESTRATEGIA"
+    ]
+  },
+  {
+    "nombre": "MotoGP",
+    "plataforma": "NINTENDO",
+    "precio": 65.0,
+    "disponible": false,
+    "generos": [
+      "CARRERAS",
+      "SIMULACION",
+      "ACCION"
+    ]
+  }
+]
